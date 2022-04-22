@@ -1,4 +1,6 @@
-﻿/* 
+﻿using GestioneEventi;
+
+/* 
 - Memorizzare e tenere traccia di tutti gli eventi in futuro che ha programmato
 - Poter gestire le prenotazioni e le disdette delle sue conferenze e tenere traccia
 quindi dei posti prenotati e di quelli disponibili per un dato evento
@@ -37,4 +39,46 @@ disposizione da C#, ma aggiungete un eventuale messaggio chiaro per
 comunicare che cosa è successo.
 
 
+1. Nel vostro programma principale Program.cs, chiedete all’utente di inserire un 
+nuovo evento con tutti i parametri richiesti dal costruttore.
+2. Dopo che l’evento è stato istanziato, chiedete all’utente se e quante prenotazioni
+vuole fare e provare ad effettuarle.
+3. Stampare a video il numero di posti prenotati e quelli disponibili.
+4. Ora chiedere all’utente fintanto che lo desidera, se e quanti posti vuole disdire. Ogni 
+volta che disdice dei posti, stampare i posti residui e quelli prenotati.
+Attenzione: In questa prima fase non è necessario dover gestire le eventuali eccezioni 
+che potrebbero insorgere, eventualmente il programma si blocca se qualcosa va storto e 
+che avete già previsto, piuttosto pensate bene alla logica del vostro programma principale 
+e della vostra classe Evento pensando bene alle responsabilità dei metodi e alla visibilità 
+di attributi e metodi.
+Questo dovrebbe essere il risultato fino a qui
+
+
 */
+
+Console.WriteLine("Inserisci un nuovo evento");
+
+Console.WriteLine("Inserisci la data dell'evento:");
+DateTime nuovaDataEvento = DateTime.Parse(Console.ReadLine());
+
+Console.WriteLine("Inserisci il titolo dell'evento:");
+string nuovoTitoloEvento = Console.ReadLine();
+
+Console.WriteLine("Inserisci la capienza massima:");
+int nuoviPostiTotali = Convert.ToInt32(Console.ReadLine());
+
+Evento nuovoEvento = new Evento(nuovoTitoloEvento, nuovaDataEvento, nuoviPostiTotali);
+
+Console.WriteLine("Vuoi effettuare delle prenotazioni?");
+if (Console.ReadLine().ToLower() == "si" )
+{
+    Console.WriteLine("Quante prenotazioni vuoi effettuare?");
+    int nuovePrenotazioni = Convert.ToInt32(Console.ReadLine());
+
+    for (int i = 0; i < nuovePrenotazioni; i++)
+    {
+        nuovoEvento.Prenota();
+    }
+
+    Console.WriteLine("Numero posti prenotati:" + nuovoEvento.getPostiPrenotati() + "| Numero posti disponibili: " + (nuovoEvento.getPostiTotali() - nuovoEvento.getPostiPrenotati()));
+}
