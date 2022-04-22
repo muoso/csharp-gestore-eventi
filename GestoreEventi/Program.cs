@@ -122,7 +122,13 @@ Console.WriteLine(nuovoProgramma.InfoProgramma());
 Console.Write("Inserisci una data per sapere che eventi ci saranno (gg/mm/yyyy): ");
 List<Evento> eventiConcomitanti = nuovoProgramma.getEventiConcomitanti(DateTime.Parse(Console.ReadLine()));
 ProgrammaEventi.PrintLista(eventiConcomitanti);
-nuovoProgramma.SvuotaLista();
+//nuovoProgramma.SvuotaLista();
+Conferenza conferenza = new Conferenza("Crisi climatica", DateTime.Parse("8/8/2022"), 45, "Salvatore Iaconesi", 34.56);
+
+nuovoProgramma.AddEvento(conferenza);
+Console.WriteLine(nuovoProgramma.InfoProgramma());
+
+
 
 
 

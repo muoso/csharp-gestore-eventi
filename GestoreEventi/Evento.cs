@@ -8,8 +8,8 @@ namespace GestioneEventi
 {
     public class Evento
     {
-        private string titoloEvento;
-        private DateTime dataEvento;
+        internal string titoloEvento;
+        internal DateTime dataEvento;
         private int postiTotali;
         private int postiPrenotati;
 
