@@ -3,17 +3,45 @@
 
 bool exceptionLoop = true;
 
+Evento nuovoEvento = null;
 
-Evento nuovoEvento = CreaEvento();
+while (exceptionLoop) {
+    try
+    {
+        nuovoEvento = CreaEvento();
+        exceptionLoop = false;
+    } catch (Exception ex)
+    {
+        Console.WriteLine(ex.Message);
+    }
+}
+
+// nuovoEvento
 
 Console.Write("Vuoi effettuare delle prenotazioni? (si/no) ");
 if (Console.ReadLine().ToLower() == "si" )
 {
-    Console.Write("Quante prenotazioni vuoi effettuare? ");
-    int nuovePrenotazioni = Convert.ToInt32(Console.ReadLine());
-    Console.WriteLine("");
+    
+    int nuovePrenotazioni = 0;
+   
+    exceptionLoop = true;
 
-    nuovoEvento.PrenotaPosti(nuovePrenotazioni);
+    while (exceptionLoop)
+    {
+        try
+        {
+            Console.Write("Quante prenotazioni vuoi effettuare? ");
+            nuovePrenotazioni = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("");
+            nuovoEvento.PrenotaPosti(nuovePrenotazioni);
+            exceptionLoop = false;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+    }
+        
     
     RiepilogoPosti(nuovoEvento);
 
@@ -21,13 +49,27 @@ if (Console.ReadLine().ToLower() == "si" )
     while (vuoiDisdire)
     {
         Console.Write("Vuoi disdire dei posti? (si/no) ");
-        if (Console.ReadLine().ToLower() == "si")
+        if (Console.ReadLine().ToLower() == "si" )
         {
-            Console.Write("Indica il numero di posti da disdire: ");
-            int nuoveDisdette = Convert.ToInt32(Console.ReadLine());
+            int nuoveDisdette = 0;
             
-            nuovoEvento.DisdiciPosti(nuoveDisdette);
-            
+            exceptionLoop = true;
+
+            while (exceptionLoop)
+            {
+                try
+                {
+                    Console.Write("Indica il numero di posti da disdire: ");
+                    nuoveDisdette = Convert.ToInt32(Console.ReadLine());
+                    nuovoEvento.DisdiciPosti(nuoveDisdette);
+                    exceptionLoop = false;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            }
+
             RiepilogoPosti(nuovoEvento);
 
         } else
@@ -53,7 +95,22 @@ Console.WriteLine("");
 
 for (int i = 0; i < nuoviEventiProgramma; i++)
 {
-    Evento nuovoEventoProgramma = CreaCicloDiEventi(i);
+    exceptionLoop = true;
+
+    Evento nuovoEventoProgramma = null;
+
+    while (exceptionLoop)
+    {
+        try
+        {
+            nuovoEventoProgramma = CreaCicloDiEventi(i);
+            exceptionLoop = false;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+    }
     nuovoProgramma.AddEvento(nuovoEventoProgramma);
 }
 

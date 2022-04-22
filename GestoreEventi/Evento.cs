@@ -59,7 +59,7 @@ namespace GestioneEventi
 
         public void setTitolo(string titolo) 
         { 
-            if (titolo == null)
+            if (titolo == "")
             {
                 throw new ArgumentNullException("Non hai inserito il titolo! ");
             }
