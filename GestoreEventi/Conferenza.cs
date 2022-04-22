@@ -28,7 +28,7 @@ namespace GestioneEventi
         {
             if (relatore == "")
             {
-                throw new ArgumentNullException("Non hai inserito il titolo! ");
+                throw new ArgumentNullException("Non hai inserito il relatore! ");
             }
             this.relatore = relatore;
         }
