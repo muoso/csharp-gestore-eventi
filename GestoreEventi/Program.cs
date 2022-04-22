@@ -56,13 +56,12 @@ Questo dovrebbe essere il risultato fino a qui
 
 */
 
-Console.WriteLine("Inserisci un nuovo evento");
-
-Console.WriteLine("Inserisci la data dell'evento:");
-DateTime nuovaDataEvento = DateTime.Parse(Console.ReadLine());
-
 Console.WriteLine("Inserisci il titolo dell'evento:");
 string nuovoTitoloEvento = Console.ReadLine();
+
+Console.WriteLine("Inserisci la data dell'evento (gg/mm/yyyy):");
+DateTime nuovaDataEvento = DateTime.Parse(Console.ReadLine());
+
 
 Console.WriteLine("Inserisci la capienza massima:");
 int nuoviPostiTotali = Convert.ToInt32(Console.ReadLine());
@@ -80,5 +79,33 @@ if (Console.ReadLine().ToLower() == "si" )
         nuovoEvento.Prenota();
     }
 
-    Console.WriteLine("Numero posti prenotati:" + nuovoEvento.getPostiPrenotati() + "| Numero posti disponibili: " + (nuovoEvento.getPostiTotali() - nuovoEvento.getPostiPrenotati()));
+    // Must Become a function
+    Console.WriteLine("Numero di posti prenotati:" + nuovoEvento.getPostiPrenotati());
+    Console.WriteLine("Numero di posti disponibili: " + (nuovoEvento.getPostiTotali() - nuovoEvento.getPostiPrenotati()));
+
+    bool vuoiDisdire = true;
+    while (vuoiDisdire)
+    {
+        Console.WriteLine("Vuoi disdire dei posti? (si/no)");
+        if (Console.ReadLine().ToLower() == "si")
+        {
+            Console.WriteLine("Indica il numero di posti da disdire: ");
+            int nuoveDisdette = Convert.ToInt32(Console.ReadLine());
+            for (int i = 0; i < nuoveDisdette; i++)
+            {
+                nuovoEvento.Disdici();
+            }
+            // Must Become a function
+            Console.WriteLine("Numero di posti prenotati:" + nuovoEvento.getPostiPrenotati());
+            Console.WriteLine("Numero di posti disponibili: " + (nuovoEvento.getPostiTotali() - nuovoEvento.getPostiPrenotati()));
+
+        } else
+        {
+            vuoiDisdire = false;
+            // Must Become a function
+            Console.WriteLine("Numero di posti prenotati:" + nuovoEvento.getPostiPrenotati());
+            Console.WriteLine("Numero di posti disponibili: " + (nuovoEvento.getPostiTotali() - nuovoEvento.getPostiPrenotati()));
+        }
+    }
+    
 }

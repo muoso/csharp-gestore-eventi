@@ -45,7 +45,7 @@ namespace GestioneEventi
         public override string ToString()
         {
             string infoEvento = this.dataEvento.ToString("dd/MM/yyyy") + " - " + this.titoloEvento;
-            return base.ToString();
+            return infoEvento;
         }
 
 
