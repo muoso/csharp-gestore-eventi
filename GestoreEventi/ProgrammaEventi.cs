@@ -37,8 +37,8 @@ namespace GestioneEventi
             return listaEventiConcomitanti;
         }
 
-        //Presa una lista di eventi, li stampa in Console.  &&&&&&&&&&&&&&&
-        static void PrintLista(List<Evento> listaEventi)
+        //Presa una lista di eventi, li stampa in Console.
+        public static void PrintLista(List<Evento> listaEventi)
         {
             foreach (Evento evento in listaEventi)
             {
@@ -67,6 +67,15 @@ namespace GestioneEventi
         data2 - titolo2
         data3 - titolo3
         */
+        public string InfoProgramma()
+        {
+            string infoProgramma = $"Nome programma evento: {this.titoloProgramma}";
+            foreach (Evento evento in this.listaEventi)
+            {
+                infoProgramma += ("/n" + evento.ToString());
+            }
+            return infoProgramma;
+        }
 
     }
 }
