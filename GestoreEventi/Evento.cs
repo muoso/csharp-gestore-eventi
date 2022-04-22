@@ -24,22 +24,28 @@ namespace GestioneEventi
 
 
 
-        public void Prenota()
+        public void PrenotaPosti(int posti)
         {
-            if(this.dataEvento<DateTime.Now || this.postiTotali == this.postiPrenotati)
+            if(this.dataEvento<DateTime.Now)
             {
-                throw new Exception();
+                throw new Exception("L'evento è gia avvenuto!");
+            } else if (this.postiTotali < (this.postiPrenotati + posti))
+            {
+                throw new Exception("Non ci sono posti sufficienti!");
             }
-            this.postiPrenotati++;
+            this.postiPrenotati += posti;
         }
 
-        public void Disdici()
+        public void DisdiciPosti(int postiDisdetti)
         {
-            if(this.dataEvento < DateTime.Now || this.postiPrenotati == 0)
+            if(this.dataEvento < DateTime.Now )
             {
-                throw new Exception();
+                throw new Exception("L'evento è gia avvenuto!");
+            } else if ((this.postiPrenotati - postiDisdetti) < 0)
+            {
+                throw new Exception("Non ci sono posti sufficienti da disdire");
             }
-            this.postiPrenotati--;
+            this.postiPrenotati -= postiDisdetti;
         }
 
         public override string ToString()
@@ -51,13 +57,34 @@ namespace GestioneEventi
 
 
 
-        public void setTitolo(string titolo) { this.titoloEvento = titolo; }
+        public void setTitolo(string titolo) 
+        { 
+            if (titolo == null)
+            {
+                throw new ArgumentNullException("Non hai inserito il titolo! ");
+            }
+            this.titoloEvento = titolo; 
+        }
         public string getTitolo() { return this.titoloEvento; }
 
-        public void setData(DateTime data) { this.dataEvento = data; }
+        public void setData(DateTime data) 
+        { 
+            if (data < DateTime.Now)
+            {
+                throw new ArgumentOutOfRangeException("La data scelta è gia passata! ");
+            }
+            this.dataEvento = data; 
+        }
         public DateTime getData() { return this.dataEvento; }
 
-        private void setPostiTotali(int posti) { this.postiTotali = posti; }
+        private void setPostiTotali(int posti) 
+        { 
+            if(posti < 0)
+            {
+                throw new ArgumentOutOfRangeException("Hai inserito un numero negativo di posti! ");
+            }
+            this.postiTotali = posti; 
+        }
         public int getPostiTotali() { return this.postiTotali; }
 
         private void setPostiPrenotati(int posti) { this.postiPrenotati = posti; }

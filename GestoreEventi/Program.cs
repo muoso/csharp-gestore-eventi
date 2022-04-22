@@ -1,6 +1,8 @@
 ﻿using GestioneEventi;
 
 
+bool exceptionLoop = true;
+
 
 Evento nuovoEvento = CreaEvento();
 
@@ -11,10 +13,7 @@ if (Console.ReadLine().ToLower() == "si" )
     int nuovePrenotazioni = Convert.ToInt32(Console.ReadLine());
     Console.WriteLine("");
 
-    for (int i = 0; i < nuovePrenotazioni; i++)
-    {
-        nuovoEvento.Prenota();
-    }
+    nuovoEvento.PrenotaPosti(nuovePrenotazioni);
     
     RiepilogoPosti(nuovoEvento);
 
@@ -26,11 +25,9 @@ if (Console.ReadLine().ToLower() == "si" )
         {
             Console.Write("Indica il numero di posti da disdire: ");
             int nuoveDisdette = Convert.ToInt32(Console.ReadLine());
-            for (int i = 0; i < nuoveDisdette; i++)
-            {
-                nuovoEvento.Disdici();
-            }
-            // Must Become a function
+            
+            nuovoEvento.DisdiciPosti(nuoveDisdette);
+            
             RiepilogoPosti(nuovoEvento);
 
         } else
@@ -56,10 +53,12 @@ Console.WriteLine("");
 
 for (int i = 0; i < nuoviEventiProgramma; i++)
 {
-    Evento nuovoEventoProgramma = CreaEvento();
+    Evento nuovoEventoProgramma = CreaCicloDiEventi(i);
     nuovoProgramma.AddEvento(nuovoEventoProgramma);
 }
 
+
+// Riepilogo
 Console.WriteLine($"Il numero di eventi nel programma è: {nuovoProgramma.getNumeroEventi()}");
 Console.WriteLine(nuovoProgramma.InfoProgramma());
 
@@ -73,8 +72,7 @@ nuovoProgramma.SvuotaLista();
 
 
 
-
-static Evento CreaEvento()
+Evento CreaEvento()
 {
     string nuovoTitoloEvento;
     DateTime nuovaDataEvento;
@@ -82,6 +80,28 @@ static Evento CreaEvento()
 
 
     Console.Write("Inserisci il titolo dell'evento: ");
+    nuovoTitoloEvento = Console.ReadLine();
+
+    Console.Write("Inserisci la data dell'evento (gg/mm/yyyy): ");
+    nuovaDataEvento = DateTime.Parse(Console.ReadLine());
+
+    Console.Write("Inserisci la capienza massima: ");
+    nuoviPostiTotali = Convert.ToInt32(Console.ReadLine());
+
+    Console.WriteLine("");
+
+    Evento nuovoEvento = new Evento(nuovoTitoloEvento, nuovaDataEvento, nuoviPostiTotali);
+    return nuovoEvento;
+}
+
+Evento CreaCicloDiEventi(int counter)
+{
+    string nuovoTitoloEvento;
+    DateTime nuovaDataEvento;
+    int nuoviPostiTotali;
+
+
+    Console.Write($"Inserisci il titolo del {counter+1}° evento: ");
     nuovoTitoloEvento = Console.ReadLine();
 
     Console.Write("Inserisci la data dell'evento (gg/mm/yyyy): ");
