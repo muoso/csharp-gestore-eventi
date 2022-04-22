@@ -69,10 +69,10 @@ namespace GestioneEventi
         */
         public string InfoProgramma()
         {
-            string infoProgramma = $"Nome programma evento: {this.titoloProgramma}";
+            string infoProgramma = "Ecco il tuo programma eventi: "+ Environment.NewLine + this.titoloProgramma;
             foreach (Evento evento in this.listaEventi)
             {
-                infoProgramma += ("/n" + evento.ToString());
+                infoProgramma += (Environment.NewLine + evento.ToString());
             }
             return infoProgramma;
         }
